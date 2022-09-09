@@ -48,7 +48,7 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
         return new ResponseEntity<>(errorDetails, HttpStatus.INTERNAL_SERVER_ERROR);
     }
 
-    @ExceptionHandler({ SignatureException.class, AuthenticationException.class , MalformedJwtException.class, ExpiredJwtException.class, UnsupportedJwtException.class, IllegalArgumentException.class})
+    @ExceptionHandler({SignatureException.class, AuthenticationException.class, MalformedJwtException.class, ExpiredJwtException.class, UnsupportedJwtException.class, IllegalArgumentException.class})
     public ResponseEntity<ErrorDetails> authenticationException(Exception exception) {
         ErrorDetails errorDetails = new ErrorDetails(new Date(), exception.getMessage(), exception.getMessage());
         return new ResponseEntity<>(errorDetails, HttpStatus.INTERNAL_SERVER_ERROR);

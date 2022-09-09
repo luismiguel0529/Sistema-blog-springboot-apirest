@@ -15,8 +15,6 @@ import org.springframework.test.context.ActiveProfiles;
 
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.*;
-
 @DataJpaTest
 @ActiveProfiles("test")
 class ComentarioServicioImplTest {
@@ -34,7 +32,7 @@ class ComentarioServicioImplTest {
     private ComentarioDto comentarioDto;
 
     @BeforeEach
-    void setUp(){
+    void setUp() {
         publicacion = TestEntities.publicacion();
         comentarioDto = TestEntities.comentarioDto();
         ModelMapper modelMapper = new ModelMapper();
@@ -44,23 +42,23 @@ class ComentarioServicioImplTest {
     @Test
     void crearComentario() {
         Publicacion publicacionSave = publicacionRepository.save(publicacion);
-        ComentarioDto comentario = comentarioServicio.crearComentario(publicacionSave.getId(),comentarioDto);
-        Assertions.assertEquals(comentario.getNombre(),comentarioDto.getNombre());
+        ComentarioDto comentario = comentarioServicio.crearComentario(publicacionSave.getId(), comentarioDto);
+        Assertions.assertEquals(comentario.getNombre(), comentarioDto.getNombre());
 
     }
 
     @Test
     void obtenerComentariosByPublicacionId() {
         Publicacion publicacionSave = publicacionRepository.save(publicacion);
-        comentarioServicio.crearComentario(publicacionSave.getId(),comentarioDto);
+        comentarioServicio.crearComentario(publicacionSave.getId(), comentarioDto);
         List<ComentarioDto> comentarios = comentarioServicio.obtenerComentariosByPublicacionId(publicacionSave.getId());
-        Assertions.assertEquals(comentarios.get(0).getNombre(),"Nombre");
+        Assertions.assertEquals(comentarios.get(0).getNombre(), "Nombre");
     }
 
     @Test
     void obtenerComentarioById() {
         Publicacion publicacionSave = publicacionRepository.save(publicacion);
-        ComentarioDto comentario = comentarioServicio.crearComentario(publicacionSave.getId(),comentarioDto);
+        ComentarioDto comentario = comentarioServicio.crearComentario(publicacionSave.getId(), comentarioDto);
         ComentarioDto getComentario = comentarioServicio.obtenerComentarioById(publicacionSave.getId(), comentario.getId());
         Assertions.assertEquals(getComentario.getNombre(), "Nombre");
     }
@@ -68,16 +66,16 @@ class ComentarioServicioImplTest {
     @Test
     void actualizarComentario() {
         Publicacion publicacionSave = publicacionRepository.save(publicacion);
-        ComentarioDto comentarioSave = comentarioServicio.crearComentario(publicacionSave.getId(),comentarioDto);
+        ComentarioDto comentarioSave = comentarioServicio.crearComentario(publicacionSave.getId(), comentarioDto);
         ComentarioDto comentarioUpdate = comentarioServicio.actualizarComentario(publicacionSave.getId(), comentarioSave.getId(), comentarioDto);
-        Assertions.assertEquals(comentarioUpdate.getNombre(),comentarioDto.getNombre());
+        Assertions.assertEquals(comentarioUpdate.getNombre(), comentarioDto.getNombre());
     }
 
 
     @Test
     void eliminarComentario() {
         Publicacion publicacionSave = publicacionRepository.save(publicacion);
-        ComentarioDto comentarioSave = comentarioServicio.crearComentario(publicacionSave.getId(),comentarioDto);
-        comentarioServicio.eliminarComentario(publicacionSave.getId(),comentarioSave.getId());
+        ComentarioDto comentarioSave = comentarioServicio.crearComentario(publicacionSave.getId(), comentarioDto);
+        comentarioServicio.eliminarComentario(publicacionSave.getId(), comentarioSave.getId());
     }
 }

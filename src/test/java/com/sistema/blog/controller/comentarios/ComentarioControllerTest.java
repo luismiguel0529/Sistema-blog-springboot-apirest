@@ -2,7 +2,6 @@ package com.sistema.blog.controller.comentarios;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.sistema.blog.dto.comentarios.ComentarioDto;
-import com.sistema.blog.dto.publicaciones.PublicacionDto;
 import com.sistema.blog.service.comentarios.ComentarioServicio;
 import com.sistema.blog.utils.TestEntities;
 import org.junit.jupiter.api.BeforeAll;
@@ -19,9 +18,7 @@ import java.util.Collections;
 
 import static org.mockito.BDDMockito.given;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @WebMvcTest(controllers = ComentarioController.class)
 @AutoConfigureMockMvc(addFilters = false)

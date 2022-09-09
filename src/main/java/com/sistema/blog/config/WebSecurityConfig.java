@@ -2,8 +2,6 @@ package com.sistema.blog.config;
 
 import com.sistema.blog.security.jwt.JwtAuthenticationEntryPoint;
 import com.sistema.blog.security.jwt.JwtAuthenticationFilter;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
