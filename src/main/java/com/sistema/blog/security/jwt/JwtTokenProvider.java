@@ -17,12 +17,12 @@ public class JwtTokenProvider {
     private String jwtSecret;
 
     @Value("${app.jwt-expiration-milliseconds}")
-    private String jwtExpirationInMs;
+    private int jwtExpirationInMs;
 
     public String generarToken(Authentication authentication) {
         String username = authentication.getName();
         Date fechaActual = Date.from(ZonedDateTime.now().toInstant());
-        Date fecheExpiracion = Date.from(ZonedDateTime.now().toInstant().plusMillis(Long.parseLong(jwtExpirationInMs)));
+        Date fecheExpiracion = Date.from(ZonedDateTime.now().toInstant().plusMillis(jwtExpirationInMs));
 
         System.out.println("fechaActual " + fechaActual);
         System.out.println("fecheExpiracion " + fecheExpiracion);

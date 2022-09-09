@@ -33,10 +33,10 @@ public class PublicacionController {
             @RequestParam(value = "pageSize", defaultValue = PAGESIZE, required = false) int pageSize,
             @RequestParam(value = "sortBy", defaultValue = SORTBY, required = false) String sortBy,
             @RequestParam(value = "sortDir", defaultValue = SORTDIR, required = false) String sortDir) {
-        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-        logger.info("Datos del Usuario= {} ", auth.getPrincipal());
-        logger.info("Datos de los permisos = {} ", auth.getAuthorities());
-        logger.info("Estas autenticado = {} ", auth.isAuthenticated());
+//        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+//        logger.info("Datos del Usuario= {} ", auth.getPrincipal());
+//        logger.info("Datos de los permisos = {} ", auth.getAuthorities());
+//        logger.info("Estas autenticado = {} ", auth.isAuthenticated());
         return new ResponseEntity<>(publicacionServicio.obtenerPublicaciones(pageNo, pageSize, sortBy, sortDir), HttpStatus.OK);
     }
 

@@ -1,7 +1,9 @@
-package com.sistema.blog.security;
+package com.sistema.blog.config;
 
 import com.sistema.blog.security.jwt.JwtAuthenticationEntryPoint;
 import com.sistema.blog.security.jwt.JwtAuthenticationFilter;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
@@ -20,7 +22,7 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 @EnableGlobalMethodSecurity(prePostEnabled = true)
 public class WebSecurityConfig {
 
-    private JwtAuthenticationEntryPoint jwtAuthenticationEntryPoint;
+    private final JwtAuthenticationEntryPoint jwtAuthenticationEntryPoint;
 
     public WebSecurityConfig(JwtAuthenticationEntryPoint jwtAuthenticationEntryPoint) {
         this.jwtAuthenticationEntryPoint = jwtAuthenticationEntryPoint;
@@ -38,7 +40,6 @@ public class WebSecurityConfig {
 
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
-
         http
                 .csrf().disable()
                 .exceptionHandling()
@@ -47,7 +48,7 @@ public class WebSecurityConfig {
                 .sessionManagement()
                 .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 .and()
-                .authorizeHttpRequests((authz) -> authz
+                .authorizeRequests((authz) -> authz
                         .antMatchers("/api/auth/**").permitAll()
                         .antMatchers(HttpMethod.GET, "/api/*").permitAll()
                         .antMatchers(HttpMethod.GET, "/api/publicaciones/{publicacionId}/comentarios/*").hasAuthority("ROLE_ADMIN")
@@ -55,7 +56,6 @@ public class WebSecurityConfig {
                         .authenticated()
                 );
         http.addFilterBefore(jwtAuthenticationFilter(), UsernamePasswordAuthenticationFilter.class);
-
         return http.build();
     }
 
